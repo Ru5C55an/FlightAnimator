@@ -208,7 +208,7 @@ class ConfigurationView : UIView {
         return segmentedControl
     }()
     
-    func changedPriority(_ segmentedControl : UISegmentedControl) {
+    @objc func changedPriority(_ segmentedControl : UISegmentedControl) {
         self.interactionDelegate?.selectedTimingPriority(FAPrimaryTimingPriority(rawValue: segmentedControl.selectedSegmentIndex)!)
     }
     
@@ -307,7 +307,7 @@ class ConfigurationView : UIView {
         var tempSwitch = UISwitch()
         tempSwitch.isOn = false
         tempSwitch.backgroundColor = UIColor.clear
-        tempSwitch.addTarget(self, action: #selector(ConfigurationView.secondary_view_value_changed(_:)), for: UIControlEvents.valueChanged)
+        tempSwitch.addTarget(self, action: #selector(ConfigurationView.secondary_view_value_changed(_:)), for: UIControl.Event.valueChanged)
         return tempSwitch
     }()
     
@@ -322,14 +322,14 @@ class ConfigurationView : UIView {
         return slider
     }()
     
-    func progress_value_changed(_ sender : UISlider) {
+    @objc func progress_value_changed(_ sender : UISlider) {
         
         let y = round(100 * sender.value) / 100
         progressLabel.text = String(format: "%.2f", y)
         self.interactionDelegate?.didUpdateTriggerProgressPriority(CGFloat(sender.value))
     }
     
-    func changedTrigger(_ segmentedControl : UISegmentedControl) {
+    @objc func changedTrigger(_ segmentedControl : UISegmentedControl) {
         
         self.interactionDelegate?.didUpdateTriggerType(segmentedControl.selectedSegmentIndex)
         
@@ -383,7 +383,7 @@ class ConfigurationView : UIView {
     }
     
     
-    func secondary_view_value_changed(_ sender : UISwitch) {
+    @objc func secondary_view_value_changed(_ sender : UISwitch) {
        
         delaySegnmentedControl.animate { (animator) in
             animator.alpha(sender.isOn ? 1.0 : 0.5).duration(0.6).easing(.outSine)

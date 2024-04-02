@@ -307,7 +307,7 @@ open class FASynchronizedGroup : CAAnimationGroup {
     override public init() {
         super.init()
         animations = [CAAnimation]()
-        fillMode = kCAFillModeForwards
+        fillMode = CAMediaTimingFillMode.forwards
         isRemovedOnCompletion = true
     }
     
@@ -471,7 +471,7 @@ internal extension FASynchronizedGroup {
         let hasPrimaryAnimations : Bool = (primaryAnimations.count > 0)
         
         if hasPrimaryAnimations == false {
-            primaryAnimations = Array(newAnimations.map {$0})  //newAnimations.filter({ $0.1 != nil })
+            primaryAnimations = newAnimations
         }
         
         let durationsArray = primaryAnimations.map({ $0.1.duration})
@@ -623,7 +623,7 @@ public extension FASynchronizedGroup {
         self.displayLink = CADisplayLink(target: self, selector: #selector(FASynchronizedGroup.updateTrigger))
         if DebugTriggerLogEnabled {  print("START ++++++++ KEY \(String(describing: animationKey))  -  CALINK  \(String(describing: displayLink))\n") }
         
-        self.displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        self.displayLink?.add(to: RunLoop.main, forMode: RunLoop.Mode.default)
         updateTrigger()
     }
     
@@ -648,7 +648,7 @@ public extension FASynchronizedGroup {
     /**
      Triggers an animation if the value or time progress is met
      */
-    func updateTrigger() {
+    @objc func updateTrigger() {
         
         for segment in segmentArray {
             if let triggerSegment = self.activeTriggerSegment(segment)  {

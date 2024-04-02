@@ -43,8 +43,8 @@ open class FABasicAnimation : CAKeyframeAnimation {
     internal func initializeInitialValues() {
         CALayer.swizzleAddAnimation()
         
-        calculationMode = kCAAnimationLinear
-        fillMode = kCAFillModeForwards
+        calculationMode = CAAnimationCalculationMode.linear
+        fillMode = CAMediaTimingFillMode.forwards
         
         isRemovedOnCompletion = true
         values = [AnyObject]()
@@ -171,11 +171,11 @@ internal extension FABasicAnimation {
         print("timingFunction has no effect, converting to 'easingFunction' property\n")
         
         switch timingFunction?.value(forKey: "name") as! String {
-        case kCAMediaTimingFunctionEaseIn:
+        case CAMediaTimingFunctionName.easeIn.rawValue:
             easingFunction = .inCubic
-        case kCAMediaTimingFunctionEaseOut:
+        case CAMediaTimingFunctionName.easeOut.rawValue:
             easingFunction = .outCubic
-        case kCAMediaTimingFunctionEaseInEaseOut:
+        case CAMediaTimingFunctionName.easeInEaseOut.rawValue:
             easingFunction = .inOutCubic
         default:
             easingFunction = .smoothStep

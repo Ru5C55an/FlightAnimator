@@ -128,14 +128,14 @@ class CurveSelectionCollectionViewCell : UICollectionViewCell {
         return picker
     }()
     
-    func value_changed(_ sender : UISwitch) {
+    @objc func value_changed(_ sender : UISwitch) {
       self.delegate?.cell(self, didSelectPrimary : sender.isOn)
     }
     
     lazy var primarySwitch: UISwitch = {
         var tempSwitch = UISwitch()
         tempSwitch.backgroundColor = UIColor.clear
-        tempSwitch.addTarget(self, action: #selector(CurveSelectionCollectionViewCell.value_changed(_:)), for: UIControlEvents.valueChanged)
+        tempSwitch.addTarget(self, action: #selector(CurveSelectionCollectionViewCell.value_changed(_:)), for: UIControl.Event.valueChanged)
         return tempSwitch
     }()
 }

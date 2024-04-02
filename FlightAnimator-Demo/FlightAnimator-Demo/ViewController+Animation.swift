@@ -105,11 +105,11 @@ extension ViewController {
         
     }
     
-    func tappedShowConfig() {
+    @objc func tappedShowConfig() {
         configView.applyAnimation(forKey: AnimationKeys.ShowConfigAnimation)
     }
     
-    func tappedCloseConfig() {
+    @objc func tappedCloseConfig() {
         configView.applyAnimation(forKey: AnimationKeys.HideConfigAnimation)
     }
     

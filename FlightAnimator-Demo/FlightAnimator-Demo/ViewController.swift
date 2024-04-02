@@ -171,7 +171,7 @@ class ViewController: UIViewController {
         
     }
     
-    func respondToPanRecognizer(_ recognizer : UIPanGestureRecognizer) {
+    @objc func respondToPanRecognizer(_ recognizer : UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
             self.initialCenter = self.dragView.center
@@ -216,8 +216,8 @@ class ViewController: UIViewController {
     
     lazy var settingsButton: UIButton = {
         var button = UIButton()
-        button.setImage(UIImage(named:"settingsIcon"), for: UIControlState())
-        button.imageEdgeInsets = UIEdgeInsetsMake(20, 20, 20, 20)
+        button.setImage(UIImage(named:"settingsIcon"), for: UIControl.State())
+        button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         button.backgroundColor = UIColor(rgba: "#2364c6")
         button.addTarget(self, action: #selector(ViewController.tappedShowConfig), for: .touchUpInside)
         return button
@@ -225,10 +225,10 @@ class ViewController: UIViewController {
     
     lazy var closeButton: UIButton = {
         var button = UIButton()
-        button.imageEdgeInsets = UIEdgeInsetsMake(20, 20, 20, 20)
-        button.setTitle("▼", for: UIControlState())
+        button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        button.setTitle("▼", for: UIControl.State())
         button.backgroundColor = UIColor.clear
-        button.setTitleColor(UIColor.white, for: UIControlState())
+        button.setTitleColor(UIColor.white, for: UIControl.State())
         button.addTarget(self, action: #selector(ViewController.tappedCloseConfig), for: .touchUpInside)
         return button
     }()
@@ -282,10 +282,10 @@ class ViewController: UIViewController {
     
     lazy var animateToTopButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle("   ▲      Top and Expand                  ".uppercased(), for: UIControlState())
+        button.setTitle("   ▲      Top and Expand                  ".uppercased(), for: UIControl.State())
         
         button.backgroundColor = UIColor(rgba: "#2364c6")
-        button.setTitleColor(UIColor.white, for: UIControlState())
+        button.setTitleColor(UIColor.white, for: UIControl.State())
         button.titleLabel?.font = UIFont(name: "Helvetica", size: 11)
         button.titleLabel?.numberOfLines = 3
         button.titleLabel?.textAlignment = .left
@@ -297,10 +297,10 @@ class ViewController: UIViewController {
     lazy var animateToBottomButton: UIButton = {
         
         let button = UIButton(type: .custom)
-        button.setTitle("   ▼      Bottom and Expand          ".uppercased(), for: UIControlState())
+        button.setTitle("   ▼      Bottom and Expand          ".uppercased(), for: UIControl.State())
         
         button.backgroundColor = UIColor(rgba: "#2364c6")
-        button.setTitleColor(UIColor.white, for: UIControlState())
+        button.setTitleColor(UIColor.white, for: UIControl.State())
         button.titleLabel?.font = UIFont(name: "Helvetica", size: 11)
         button.titleLabel?.numberOfLines = 3
         button.titleLabel?.textAlignment = .left
@@ -324,10 +324,10 @@ class ViewController: UIViewController {
     
     func newButton(withTitle title : String , action: Selector, backgroundColor : UIColor = UIColor.clear, textColor : UIColor = UIColor.white) -> UIButton {
         let button = UIButton(type: .custom)
-        button.setTitle(title, for: UIControlState())
+        button.setTitle(title, for: UIControl.State())
         
         button.backgroundColor = backgroundColor
-        button.setTitleColor(textColor, for: UIControlState())
+        button.setTitleColor(textColor, for: UIControl.State())
         button.titleLabel?.font = UIFont(name: "Helvetica", size: 11)
         button.titleLabel?.numberOfLines = 3
         button.titleLabel?.textAlignment = .center
@@ -361,12 +361,12 @@ class ViewController: UIViewController {
 
 extension ViewController {
     
-    func animateToTop() {
+    @objc func animateToTop() {
         let finalFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 240)
         animateView(finalFrame)
     }
     
-    func animateToBottom() {
+    @objc func animateToBottom() {
         let bottomButtonOffset : CGFloat = 100.0
         let finalFrame = CGRect(x: 0, y: UIScreen.main.bounds.height - 240.0 - bottomButtonOffset, width: UIScreen.main.bounds.width, height: 240)
         animateView(finalFrame)
@@ -377,15 +377,15 @@ extension ViewController {
         return b
     }
     
-    func toButtonRect(_ sender : UIButton) {
+    @objc func toButtonRect(_ sender : UIButton) {
         animateView(sender.frame)
     }
     
-    func topRight(_ sender : UIButton) {
+    @objc func topRight(_ sender : UIButton) {
         animateView(sender.frame)
     }
     
-    func topLeft(_ sender : UIButton) {
+    @objc func topLeft(_ sender : UIButton) {
         animateView(sender.frame, toAlpha : 0.0)
     }
     
@@ -401,7 +401,7 @@ extension ViewController {
         animateView(sender.frame)
     }
     
-    func centerCenter(_ sender : UIButton) {
+    @objc func centerCenter(_ sender : UIButton) {
         let initialFrame = sender.frame
         
         let initialTransform = CATransform3DIdentity
@@ -419,7 +419,7 @@ extension ViewController {
         animateView(sender.frame)
     }
     
-    func bottomCenter(_ sender : UIButton) {
+    @objc func bottomCenter(_ sender : UIButton) {
         animateView(sender.frame)
     }
     
